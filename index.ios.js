@@ -9,11 +9,6 @@ var ExampleProject = require('./ExampleProject');
 
 var {
   AppRegistry,
-  StyleSheet,
-  Text,
-  Navigator,
-  View,
-  Component
 } = React;
 
 

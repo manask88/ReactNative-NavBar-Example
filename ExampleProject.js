@@ -3,15 +3,42 @@ var NavigationBar = require('react-native-navbar');
 var TestView = require('./TestView');
 
 var {
-  AppRegistry,
   StyleSheet,
   Text,
   Navigator,
   View,
-  Component
+  Component,
+  TouchableOpacity
 } = React;
 
 
+
+/**
+ * Custom `Prev` button component
+ */
+class CustomPrev extends React.Component {
+  render() {
+    return (
+      <TouchableOpacity onPress={() => console.log('prev') }>
+        <Text style={styles.customLeftButton}>Back</Text>
+      </TouchableOpacity>
+    );
+  }
+}
+
+/**
+ * Custom `Next` button component
+ */
+class CustomNext extends React.Component {
+  render() {
+    return (
+      <TouchableOpacity onPress={() => console.log('next') }>
+        <Text style={styles.customRightButton}>Next</Text>
+
+      </TouchableOpacity>
+    );
+  }
+}
 
 class ExampleProject extends Component{
 
@@ -25,8 +52,6 @@ class ExampleProject extends Component{
         route: route
       });
 
-
-      console.log('navver available')
     }
 
     return (
@@ -45,43 +70,34 @@ class ExampleProject extends Component{
         renderScene={this.renderScene}
         initialRoute={{
           component: <Text>{'initial'}</Text>,
-          navigationBar: <NavigationBar backgroundStyle={styles.navBarContainer} customPrev={<Text style={styles.navBarTitleNext}>Prev</Text>} customNext={<Text style={styles.navBarTitleNext} >Next</Text>} title="Initial View" nextTitle="dd" buttonsColor="white"  onNext={ console.log('d')}
-            onNext={ console.log('next')}
+          navigationBar: <NavigationBar
+                          backgroundStyle={styles.navBarContainer}
+                          title="Initial View"
+                          customPrev={<CustomPrev/>}
+                          customNext={<CustomNext/>}
+
           />
         }}
       />
     );
   }
 };
-const NAV_BAR_HEIGHT = 44;
-const STATUS_BAR_HEIGHT = 20;
-const NAV_HEIGHT = NAV_BAR_HEIGHT + STATUS_BAR_HEIGHT;
+
 var styles = StyleSheet.create({
   navBarContainer: {
-   backgroundColor: 'blue',
-
- },
+    backgroundColor: 'blue',
+  },
   container: {
     flex: 1,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  customLeftButton: {
+    left: 10,
+    top: 30,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  customRightButton: {
+    right: 10,
+    top: 30,
   },
-  navBarTitleNext: {
-    textAlign: 'right',
-    color: '#373e4d',
-    fontWeight: '500',
-    left: 0,
-    right: 0,
-    bottom: -30,
-},
 });
 
 
